@@ -29,3 +29,6 @@
 
 - dane przechowuje: **dział IT**, **dział obsługi bagażowej**
   *! Przedyskutować to z mentorami*
+
+
+![strefy](pictures/excalidraw.png)
