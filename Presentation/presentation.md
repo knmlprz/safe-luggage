@@ -32,3 +32,5 @@
 
 
 ![strefy](pictures/excalidraw.png)
+
+opencv-python
