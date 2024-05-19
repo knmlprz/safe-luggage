@@ -1,0 +1,41 @@
+---
+title: "Raport o bagażach"
+author: "Rafal Bazan"
+date: "2024-05-19"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(root.dir = "D:/moje/projekty/safe-luggage/Raport")
+```
+
+### How abandoned luggage causes havoc at Paris airports
+
+https://www.thelocal.fr/20161005/how-abandoned-luggage-causes-havoc-at-paris-airports
+
+Data publikacji: 5 Oct, 2016
+
+- w 2014 roku na lotniskach Charles de Gaulle i Orly wzywano specjalistyczne zespoły saperów 1,600 razy
+
+- w 2015 roku był wzrost o 37.5% , czyli 2,200 razy **to daje około 6 razy na dzień**
+  
+- w 2016 roku 1,850 razy
+
+- co najmniej godzina potrzebna do rozwiązania problemu
+
+- kontrole tworzą nie potrzebny strach u pasażerów
+
+- po zidentyfikowaniu bagażu jest skanowany xRayem i jeśli nie uda się zweryfikować jego zawartości,
+  zostaje zniszczona w kokntrolowanej eksplozji. **w 2015 roku doszło tylko do 15 przypadków**, 
+  w żadnych nie znaleziono materiałów wybuchowych
+
+> „Opinia publiczna musi w dalszym ciągu nas ostrzegać. Ale jednocześnie musimy zwiększyć ich świadomość, aby nie zapomnieli o walizkach” – powiedziało LCI źródło policyjne.
+
+- pasażerowie w większości przypadków celowo porzucają bagaż, bo nie chcą dodatkowo płacić za odprawe **zwłaszcza w pobliżu stanowiska odprawy**
+
+
+
+
+
+```{r}
+```
