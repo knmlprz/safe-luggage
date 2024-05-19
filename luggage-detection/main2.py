@@ -1,16 +1,10 @@
 from ultralytics import YOLO
 import cv2
-import math
-import datetime
-
+import math 
 # start webcam
 cap = cv2.VideoCapture(0)
 cap.set(3, 640)
 cap.set(4, 480)
-
-is_recording = False
-fourcc = cv2.VideoWriter_fourcc(*'XVID')  # Adjust video codec if needed
-out_video = None
 
 # model
 model = YOLO("yolo-Weights/yolov8n.pt")
@@ -30,8 +24,6 @@ classNames = ["person", "bicycle", "car", "motorbike", "aeroplane", "bus", "trai
 
 selectedClass = {0:"person", 26:"handbag",28:"suitcase",24:"backpack"}
 color2 = (0, 255, 0)
-amount_luggage = 0
-amount_people = 0
 
 while True:
     success, img = cap.read()
@@ -40,11 +32,10 @@ while True:
     # coordinates
     for r in results:
         boxes = r.boxes
-        person_in_boxes = [int(bx.cls[0]) == 0 for bx in boxes]
         for box in boxes:
             confidence = math.ceil((box.conf[0]*100))/100
             cls = int(box.cls[0])
-            if cls in selectedClass.keys() and confidence >=0:
+            if cls in selectedClass.keys() and confidence >=0.1:
                 # bounding box
                 x1, y1, x2, y2 = box.xyxy[0]
                 x1, y1, x2, y2 = int(x1), int(y1), int(x2), int(y2) # convert to int values
@@ -53,11 +44,7 @@ while True:
                     # put box in cam
                     cv2.rectangle(img, (x1, y1), (x2, y2), (255, 0, 0), 3)
                 else:
-                    if True in person_in_boxes:
-                        cv2.rectangle(img, (x1, y1), (x2, y2), color2, 3)
-                    else:
-                        cv2.rectangle(img, (x1, y1), (x2, y2), (0, 0, 255), 3)
-
+                    cv2.rectangle(img, (x1, y1), (x2, y2), color2, 3)
                 # confidence
                 
                 print("Confidence --->",confidence)
@@ -73,27 +60,13 @@ while True:
                 thickness = 2
 
                 cv2.putText(img, classNames[cls], org, font, fontScale, color, thickness)
-                
-    if is_recording:
-        out_video.write(img)
+
     cv2.imshow('Webcam', img)
-    key = cv2.waitKey(1)
-    if key == ord('q'):
+    if cv2.waitKey(1) == ord('q'):
         break
-    elif key == ord('r'):
-        if not is_recording:  # Start recording only if not already recording
-            is_recording = True
-            timestamp = datetime.datetime.now().strftime("%Y-%m-%d_%H-%M-%S")  # Create unique filename
-            out_video = cv2.VideoWriter(f"recording_{timestamp}.avi", fourcc, 20.0, (img.shape[1], img.shape[0]))  # Adjust output video settings
-
-    # Stop recording on 's' key press
-    elif key == ord('s'):
-        if is_recording:  # Stop recording only if currently recording
-            is_recording = False
-            out_video.release()
-            out_video = None
-            break
-
-
+    if cv2.waitKey(1) == ord('k'):
+        color2 = (0, 0, 255)
+    if cv2.waitKey(1) == ord('l'):
+        color2 = (0, 255, 0)
 cap.release()
 cv2.destroyAllWindows()
